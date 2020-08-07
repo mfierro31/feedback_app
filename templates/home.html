@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if session['username'] %}
+<h1 class="display-1 text-center">Welcome back, {{user.first_name}}!</h1>
+<img class="img-fluid mb-4" style="width: 100%; height: 100%" src="https://thumbs.gfycat.com/HomelyKnobbyAfricanclawedfrog-size_restricted.gif" alt="Family reunion, yay gif">
+<p class="lead text-center mb-4">What would you like to do?  Go to <a href="/users/{{user.username}}">your page</a>, view <a href="/feedback">feedback</a>, or view <a href="/users">users</a>?</p>
+{% else %}
+<h1 class="display-1 text-center">Welcome to our app!</h1>
+<img class="img-fluid mb-4" style="width: 100%; height: 100%" src="https://media.tenor.com/images/d93eb2d338bc81fea8e8a947932d1f9e/tenor.gif" alt="Welcome to Jurassic Park gif">
+<p class="lead text-center mb-4"><a href="/login">Login</a> or <a href="/register">sign up</a> with us to get started!</p>
+{% endif %}
+{% endblock %}

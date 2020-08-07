@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Feedback{% endblock %}
+
+{% block content %}
+<h1 class="display-1 text-center">Feedback</h1>
+{% for f in feedback %}
+<div class="mb-5">
+  <h5 class="display-5 mt-4">{{f.title}}</h5>
+  <p>{{f.content}}  <b><i>By <a class="text-dark" href="/users/{{f.user.username}}">{{f.user.username}}</a></i></b></p>
+  {% if session['username'] == f.user.username %}
+  <a href="/feedback/{{f.id}}/update">Edit</a>
+  |
+  <form class="d-inline" action="/feedback/{{f.id}}/delete" method="POST">
+    <button style="padding-top: 3px" class="pl-0 btn btn-link">Delete</button>
+  </form>
+  {% endif %}
+</div>
+{% endfor %}
+{% endblock %}

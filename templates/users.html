@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Users{% endblock %}
+
+{% block content %}
+<h1 class="display-1 text-center">Users</h1>
+{% for user in users %}
+{% if user.username != session['username'] %}
+<h5 class="display-5"><a href="/users/{{user.username}}">{{user.username}}</a></h5>
+{% endif %}
+{% endfor %}
+{% endblock %}

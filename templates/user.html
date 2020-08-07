@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}{{user.first_name}} {{user.last_name}}{% endblock %}
+
+{% block content %}
+<h1 class="display-1 text-center">{{user.first_name}} {{user.last_name}}</h1>
+<h3 class="display-3 text-info">Info</h3>
+<p><b>Username: </b>{{user.username}}</p>
+<p><b>Email: </b>{{user.email}}</p>
+<p><b>First Name: </b>{{user.first_name}}</p>
+<p><b>Last Name: </b>{{user.last_name}}</p>
+{% if session['username'] == user.username %}
+<form class="mb-4" action="/users/{{user.username}}/delete" method="POST">
+  <button class="btn btn-danger">Delete profile</button>
+</form>
+{% endif %}
+<h3 class="display-3 text-info text-left">Feedback</h3>
+{% if session['username'] == user.username %}
+<a href="/users/{{user.username}}/feedback/add">Add feedback</a>
+{% endif %}
+{% for f in user.feedback %}
+<div class="mb-5">
+  <h5 class="display-5 mt-4">{{f.title}}</h5>
+  <p>{{f.content}}</p>
+  {% if session['username'] == user.username %}
+  <a href="/feedback/{{f.id}}/update">Edit</a>
+  |
+  <form class="d-inline" action="/feedback/{{f.id}}/delete" method="POST">
+    <button style="padding-top: 3px" class="pl-0 btn btn-link">Delete</button>
+  </form>
+</div>
+{% endif %}
+{% endfor %}
+{% endblock %}
