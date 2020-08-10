@@ -5,7 +5,7 @@ from forms import RegisterForm, LoginForm, FeedbackForm
 import os
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgres:///feedback_db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "postgres:///feedback_db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "abc123")
